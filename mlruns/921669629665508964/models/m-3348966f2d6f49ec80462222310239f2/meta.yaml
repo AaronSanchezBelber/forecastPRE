@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/Lenovo/Desktop/krish-udemy/etl-salesforecast/mlruns/921669629665508964/models/m-3348966f2d6f49ec80462222310239f2/artifacts
+creation_timestamp: 1770744017336
+experiment_id: '921669629665508964'
+last_updated_timestamp: 1770744032952
+model_id: m-3348966f2d6f49ec80462222310239f2
+model_type: ''
+name: model
+source_run_id: 52711deb44d049f2b27cbdb83f9210a6
+status: 2
+status_message: null

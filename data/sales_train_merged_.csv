@@ -1,0 +1,11 @@
+date,city,shop_id,shop_name,item_category_id,item_category_name,item_id,item_name,unique_id,item_price,item_cnt_day
+2013-11-01,Moscú,25,"Moscú SEC ""Atrium""",55,Música - CD de la producción local,2574,Del Rey Lana Nació para morir la edición de Paradise 2cd,25-2574,399,2
+2013-11-02,Moscú,25,"Moscú SEC ""Atrium""",55,Música - CD de la producción local,2574,Del Rey Lana Nació para morir la edición de Paradise 2cd,25-2574,399,1
+2013-11-03,Moscú,31,"centro comercial de Moscú ""Semenov""",23,Juegos - XBOX 360,3734,Grand Theft Auto V [Xbox 360, subtítulos rusos],31-3734,2512.22,1
+2013-11-04,SPb,12,"SPb TC ""Nevsky""",40,Juegos - PS3,1023,FIFA 14 [PS3],12-1023,2199.0,3
+2013-11-05,Moscú,56,"Moscú TC ""Mega""",20,Accesorios - Consolas,9123,Control Inalámbrico XBOX 360,56-9123,1799.0,2
+2013-11-06,SPb,15,"SPb TC ""Galeria""",12,Software - PC,1122,Windows 8 Pro,15-1122,9999.0,1
+2013-11-07,Moscú,7,"Moscú TC ""Gorbushkin""",3,DVD - Películas,4512,The Hobbit [DVD],7-4512,599.0,4
+2013-11-08,SPb,12,"SPb TC ""Nevsky""",40,Juegos - PS3,1023,FIFA 14 [PS3],12-1023,2199.0,2
+2013-11-09,Moscú,25,"Moscú SEC ""Atrium""",55,Música - CD de la producción local,2574,Del Rey Lana Nació para morir la edición de Paradise 2cd,25-2574,399,3
+2013-11-10,Moscú,31,"centro comercial de Moscú ""Semenov""",23,Juegos - XBOX 360,3734,Grand Theft Auto V [Xbox 360, subtítulos rusos],31-3734,2512.22,1

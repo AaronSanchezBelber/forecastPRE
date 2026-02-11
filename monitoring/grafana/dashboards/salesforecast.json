@@ -1,0 +1,52 @@
+{
+  "uid": "salesforecast",
+  "title": "SalesForecast Monitoring",
+  "timezone": "browser",
+  "schemaVersion": 37,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Eval RMSE",
+      "id": 1,
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        { "expr": "salesforecast_eval_rmse", "legendFormat": "eval_rmse" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Eval MAE",
+      "id": 2,
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        { "expr": "salesforecast_eval_mae", "legendFormat": "eval_mae" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Eval R2",
+      "id": 3,
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        { "expr": "salesforecast_eval_r2", "legendFormat": "eval_r2" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Validation RMSE/MAE/R2",
+      "id": 4,
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "targets": [
+        { "expr": "salesforecast_val_rmse", "legendFormat": "val_rmse" },
+        { "expr": "salesforecast_val_mae", "legendFormat": "val_mae" },
+        { "expr": "salesforecast_val_r2", "legendFormat": "val_r2" }
+      ]
+    }
+  ]
+}
