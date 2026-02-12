@@ -11,4 +11,5 @@ xgboost
 mlflow
 
 python-multipart
+dvc
 

@@ -1,0 +1,83 @@
+# -------------------------------------------------
+# NOMBRE DEL WORKFLOW
+# -------------------------------------------------
+name: Apply changes to infrastructure (GCP)
+
+# -------------------------------------------------
+# EVENTOS QUE DISPARAN EL WORKFLOW
+# -------------------------------------------------
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - infrastructure/**
+
+# -------------------------------------------------
+# PERMISOS NECESARIOS PARA OIDC
+# -------------------------------------------------
+permissions:
+  contents: read
+  id-token: write
+
+# -------------------------------------------------
+# JOBS
+# -------------------------------------------------
+jobs:
+  deploy:
+    name: Deploy Infrastructure to GCP
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # ---------------------------------------------
+      # 1️⃣ CLONAR REPOSITORIO
+      # ---------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ---------------------------------------------
+      # 2️⃣ AUTENTICARSE EN GCP
+      # ---------------------------------------------
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      # ---------------------------------------------
+      # 3️⃣ INSTALAR GOOGLE CLOUD SDK
+      # ---------------------------------------------
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # ---------------------------------------------
+      # 4️⃣ INSTALAR TERRAFORM
+      # ---------------------------------------------
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      # ---------------------------------------------
+      # 5️⃣ VERIFICAR VERSIÓN
+      # ---------------------------------------------
+      - name: Terraform Version
+        run: terraform version
+
+      # ---------------------------------------------
+      # 6️⃣ TERRAFORM INIT
+      # ---------------------------------------------
+      - name: Terraform Init
+        run: terraform -chdir=infrastructure init
+
+      # ---------------------------------------------
+      # 7️⃣ TERRAFORM PLAN (opcional pero recomendado)
+      # ---------------------------------------------
+      - name: Terraform Plan
+        run: terraform -chdir=infrastructure plan
+
+      # ---------------------------------------------
+      # 8️⃣ TERRAFORM APPLY
+      # ---------------------------------------------
+      - name: Terraform Apply
+        run: terraform -chdir=infrastructure apply -auto-approve
