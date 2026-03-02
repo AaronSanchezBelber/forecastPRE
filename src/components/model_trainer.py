@@ -86,11 +86,18 @@ class ModelTrainer:
             # push metrics to Prometheus Pushgateway if configured
             pushgateway_url = os.getenv("PUSHGATEWAY_URL")
             if pushgateway_url:
-                registry = CollectorRegistry()
-                Gauge("salesforecast_val_rmse", "Validation RMSE", registry=registry).set(rmse)
-                Gauge("salesforecast_val_mae", "Validation MAE", registry=registry).set(mae)
-                Gauge("salesforecast_val_r2", "Validation R2", registry=registry).set(r2)
-                push_to_gateway(pushgateway_url, job="model_trainer", registry=registry)
+                try:
+                    registry = CollectorRegistry()
+                    Gauge("salesforecast_val_rmse", "Validation RMSE", registry=registry).set(rmse)
+                    Gauge("salesforecast_val_mae", "Validation MAE", registry=registry).set(mae)
+                    Gauge("salesforecast_val_r2", "Validation R2", registry=registry).set(r2)
+                    push_to_gateway(pushgateway_url, job="model_trainer", registry=registry)
+                except Exception as push_err:
+                    logging.warning(
+                        "Prometheus push skipped due to error: %s. "
+                        "If using a Pushgateway, ensure it's running or unset PUSHGATEWAY_URL.",
+                        push_err,
+                    )
 
             # return trained model
             return model

@@ -95,11 +95,18 @@ class ModelEvaluation:
             # push metrics to Prometheus Pushgateway if configured
             pushgateway_url = os.getenv("PUSHGATEWAY_URL")
             if pushgateway_url:
-                registry = CollectorRegistry()
-                Gauge("salesforecast_eval_rmse", "Eval RMSE", registry=registry).set(rmse)
-                Gauge("salesforecast_eval_mae", "Eval MAE", registry=registry).set(mae)
-                Gauge("salesforecast_eval_r2", "Eval R2", registry=registry).set(r2)
-                push_to_gateway(pushgateway_url, job="model_evaluation", registry=registry)
+                try:
+                    registry = CollectorRegistry()
+                    Gauge("salesforecast_eval_rmse", "Eval RMSE", registry=registry).set(rmse)
+                    Gauge("salesforecast_eval_mae", "Eval MAE", registry=registry).set(mae)
+                    Gauge("salesforecast_eval_r2", "Eval R2", registry=registry).set(r2)
+                    push_to_gateway(pushgateway_url, job="model_evaluation", registry=registry)
+                except Exception as push_err:
+                    logging.warning(
+                        "Prometheus push skipped due to error: %s. "
+                        "If using a Pushgateway, ensure it's running or unset PUSHGATEWAY_URL.",
+                        push_err,
+                    )
 
             print("Model evaluation completed")
             return metrics

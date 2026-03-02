@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s        # Intervalo global: Prometheus recogerá métricas cada 15 segundos
+
+scrape_configs:               # Lista de trabajos (jobs) que Prometheus debe monitorizar
+
+  - job_name: 'flask_app'     # Nombre del job: sirve para identificar las métricas en Prometheus
+    static_configs:
+      - targets: ['host.docker.internal:5000']
+                               # Dirección del servicio a monitorizar
+                               # 'host.docker.internal' apunta al host desde dentro del contenedor
+                               # Puerto 5000: donde tu app Flask expone /metrics

@@ -1,4 +1,4 @@
-﻿python-dotenv
+python-dotenv
 pandas
 numpy
 pymongo
@@ -9,7 +9,5 @@ prometheus_client
 pyyaml
 xgboost
 mlflow
-
 python-multipart
 dvc
-
