@@ -3,3 +3,5 @@ README.md
 logs/
 SalesForec.egg-info
 artifacts
+*.json
+keys/
