@@ -11,3 +11,8 @@ xgboost
 mlflow
 python-multipart
 dvc
+
+# jinja2 
+# joblib
+# fastapi
+# uvicorn
