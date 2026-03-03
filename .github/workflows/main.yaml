@@ -22,8 +22,8 @@ permissions:
 # =========================================================
 env:
   GCP_REGION: us-central1
-  GCP_PROJECT_ID: forecast-project
-  GCP_ARTIFACT_REPOSITORY: networksecurity-repo
+  GCP_PROJECT_ID: recommerder
+  GCP_ARTIFACT_REPOSITORY: my-repositorio
   IMAGE_NAME: networksecurity
 
 jobs:
