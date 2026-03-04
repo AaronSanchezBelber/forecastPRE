@@ -98,9 +98,15 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      # Instalar SDK de gcloud
+      # Instalar SDK de gcloud + plugin moderno de GKE
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          install_components: 'gke-gcloud-auth-plugin'
+
+      # Activar uso del plugin (REQUERIDO en Kubernetes 1.26+)
+      - name: Enable GKE auth plugin
+        run: echo "USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> $GITHUB_ENV
 
       # Configurar proyecto
       - name: Set GCP project
@@ -121,7 +127,7 @@ jobs:
       # Actualizar imagen con el SHA generado en el build
       - name: Update deployment image
         run: |
-          kubectl set image deployment/fore-app  \
-          fore-app =$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$GCP_ARTIFACT_REPOSITORY/$IMAGE_NAME:${{ github.sha }}
+          kubectl set image deployment/fore-app \
+          nombre-container=$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$GCP_ARTIFACT_REPOSITORY/$IMAGE_NAME:${{ github.sha }}
 
 
