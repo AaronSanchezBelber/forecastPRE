@@ -1,0 +1,71 @@
+# ========================================================= # 🔹 DEPLOYMENT # =========================================================
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: fore-app 
+  labels:
+    app: fore-app 
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: fore-app 
+
+  template:
+    metadata:
+      labels:
+        app: fore-app 
+
+    spec:
+      containers:
+        - name: nombre-container
+          image: us-central1-docker.pkg.dev/recommerder/my-repositorio
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 5000
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+--- # ========================================================= # 🔹 SERVICE # =========================================================
+
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nfore-app-service
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: fore-app 
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
